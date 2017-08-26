@@ -1,16 +1,19 @@
 buildscript {
     repositories {
-        jcenter()
+        jcenter() { url 'http://jcenter.bintray.com/' }
+        maven { url "https://jitpack.io" }
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
+        jcenter() { url 'http://jcenter.bintray.com/' }
+        maven { url "https://jitpack.io" }
     }
 }
 
