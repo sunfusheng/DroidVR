@@ -14,24 +14,29 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/md_blue_grey_300"
         android:ellipsize="end"
-        android:maxLines="2"
+        android:maxLines="1"
+        android:textColor="@color/c1"
         android:textSize="@dimen/f6"/>
+
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d3"
+        android:textColor="@color/c2"
+        android:textSize="@dimen/f7"/>
 
     <android.support.percent.PercentRelativeLayout
         android:id="@+id/prl_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d3"
-        android:background="@color/md_blue_grey_300">
+        android:layout_marginTop="@dimen/d3">
 
-        <com.sunfusheng.glideimageview.GlideImageView
-            android:id="@+id/giv"
+        <com.google.vr.sdk.widgets.pano.VrPanoramaView
+            android:id="@+id/vrPanoramaView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="1px"
-            android:scaleType="centerCrop"
             app:layout_aspectRatio="178%"
             app:layout_widthPercent="100%"/>
     </android.support.percent.PercentRelativeLayout>
