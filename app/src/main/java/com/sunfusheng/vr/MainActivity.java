@@ -1,24 +1,31 @@
 package com.sunfusheng.vr;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
+import com.sunfusheng.vr.about.AboutActivity;
 import com.sunfusheng.vr.adapter.PanoramaImageAdapter;
 import com.sunfusheng.vr.model.ModelUtil;
+import com.sunfusheng.vr.model.PanoramaImageModel;
 import com.sunfusheng.vr.utils.ImageUtil;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     private ImageView ivMine;
+    private TextView tvTitle;
     public VrPanoramaView vrPanoramaView;
     private RecyclerView recyclerView;
 
@@ -36,13 +43,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         ivMine = (ImageView) findViewById(R.id.iv_mine);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        vrPanoramaView = (VrPanoramaView) findViewById(R.id.vrPanoramaView);
-
+        tvTitle = (TextView) findViewById(R.id.tv_title);
         ImageUtil.colorImageViewDrawable(ivMine, R.color.transparent60_white);
 
-        loadPanoramaImage(ModelUtil.getPanoramaImageList().get(currPosition).assetName);
+        vrPanoramaView = (VrPanoramaView) findViewById(R.id.vrPanoramaView);
+        vrPanoramaView.setTouchTrackingEnabled(true);
+        vrPanoramaView.setFullscreenButtonEnabled(true);
+        vrPanoramaView.setInfoButtonEnabled(false);
+        vrPanoramaView.setStereoModeButtonEnabled(false);
+        currPosition = new Random().nextInt(ModelUtil.getPanoramaImageList().size());
+        PanoramaImageModel model = ModelUtil.getPanoramaImageList().get(currPosition);
+        loadPanoramaImage(model);
 
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mAdapter = new PanoramaImageAdapter(this, ModelUtil.getPanoramaImageList());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);
@@ -50,35 +63,38 @@ public class MainActivity extends AppCompatActivity {
 
     private void initListener() {
         ivMine.setOnClickListener(v -> {
-
+            startActivity(new Intent(this, AboutActivity.class));
         });
 
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             if (currPosition == position) return;
             currPosition = position;
-            String assetName = mAdapter.getData().get(position).assetName;
-            loadPanoramaImage(assetName);
+            PanoramaImageModel model = mAdapter.getData().get(position);
+            loadPanoramaImage(model);
         });
     }
 
-    private void loadPanoramaImage(String assetName) {
+    private void loadPanoramaImage(PanoramaImageModel model) {
+        loadPanoramaImage(getBitmapFromAssets(model.assetName));
+        tvTitle.setText(model.title);
+    }
+
+    private void loadPanoramaImage(Bitmap bitmap) {
+        if (bitmap == null) return;
+        VrPanoramaView.Options options = new VrPanoramaView.Options();
+        options.inputType = VrPanoramaView.Options.TYPE_MONO;
+        vrPanoramaView.loadImageFromBitmap(bitmap, options);
+    }
+
+    private Bitmap getBitmapFromAssets(String fileName) {
+        if (TextUtils.isEmpty(fileName)) return null;
         try {
-            InputStream inputStream = getAssets().open(assetName);
-            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-            vrPanoramaView.setTouchTrackingEnabled(true);
-            vrPanoramaView.setFullscreenButtonEnabled(true);
-            vrPanoramaView.setInfoButtonEnabled(false);
-            vrPanoramaView.setStereoModeButtonEnabled(false);
-            VrPanoramaView.Options options = new VrPanoramaView.Options();
-            options.inputType = VrPanoramaView.Options.TYPE_MONO;
-            vrPanoramaView.loadImageFromBitmap(bitmap, options);
-            vrPanoramaView.setOnClickListener(v -> {
-                Toast.makeText(this, "setDisplayMode()", Toast.LENGTH_SHORT).show();
-                vrPanoramaView.setDisplayMode(2);
-            });
-        } catch (Exception e) {
+            InputStream inputStream = getAssets().open(fileName);
+            return BitmapFactory.decodeStream(inputStream);
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override

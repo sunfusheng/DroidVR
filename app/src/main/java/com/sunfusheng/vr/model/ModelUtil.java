@@ -11,11 +11,12 @@ import java.util.List;
 public class ModelUtil {
 
     public static final String[] titleArr = {
-            "帝都、北京、故宫",
+            "帝都、北京",
             "魔都、上海",
             "妖都、广州",
-            "香港全景图",
+            "香江、香港",
             "360°太空全景",
+            "从月球望地球",
             "迪拜塔",
             "希腊、圣托里尼岛",
             "马尔代夫全景",
@@ -31,6 +32,7 @@ public class ModelUtil {
             "广州有妖都、花都之称，著名景点有花城广场、广州塔、黄埔军校、长隆欢乐世界、圣心大教堂等。",
             "香港，简称“港”，全称为中华人民共和国香港特别行政区，香港是一座高度繁荣的国际大都市，全境由香港岛、九龙半岛、新界等3大区域组成。",
             "天高地迥，绝宇宙之无穷；\n兴尽悲来，识盈虚之有数。",
+            "我们的征途是星辰大海！",
             "迪拜塔是世界第一高楼与人工构造物，楼层总数162层，造价15亿美元。\n迪拜塔也叫哈利法塔，在古阿拉伯世界中，哈利法为“伊斯兰世界最高领袖”之意，同时也是历史上阿拉伯帝国统治者的称号。",
             "圣托里尼（Santorini）是在希腊大陆东南200公里的爱琴海上由一群火山组成的岛环，圣托里尼岛环上最大的一个岛也叫圣托里尼岛。",
             "马尔代夫全称：马尔代夫共和国位于南亚，是印度洋上的一个岛国，也是世界上最大的珊瑚岛国。由1200余个小珊瑚岛屿组成，其中202个岛屿有人居住，从空中鸟瞰就像一串珍珠撒在印度洋上。面积298平方公里（不计算领海），是亚洲最小的国家。",
@@ -46,6 +48,7 @@ public class ModelUtil {
             "guangzhou.jpg",
             "xianggang.jpg",
             "sky1.jpg",
+            "sky2.jpg",
             "dibaita.jpg",
             "santorini.jpg",
             "maldives.jpg",
@@ -61,6 +64,7 @@ public class ModelUtil {
             R.mipmap.guangzhou,
             R.mipmap.xianggang,
             R.mipmap.sky1,
+            R.mipmap.sky2,
             R.mipmap.dibaita,
             R.mipmap.santorini,
             R.mipmap.maldives,
