@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
+Properties prop = new Properties()
+prop.load(new FileInputStream(file("../signing.properties")))
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
@@ -18,11 +21,41 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    signingConfigs {
+        release {
+            storeFile file(prop['KEYSTORE_FILEPATH'])
+            storePassword prop['STORE_PASSWORD']
+            keyAlias prop['KEY_ALIAS']
+            keyPassword prop['KEY_PASSWORD']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release // apk签名
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all {
+                variant -> generateAppName(variant)
+            }
         }
+
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all {
+                variant -> generateAppName(variant)
+            }
+        }
+    }
+}
+
+//生成自定义App名称
+def generateAppName(variant) {
+    variant.outputs.each { output ->
+        def file = output.outputFile
+        output.outputFile = new File(file.parent, "DroidVR-V" + android.defaultConfig.versionName + ".apk")
     }
 }
 
