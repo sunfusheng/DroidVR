@@ -6,9 +6,11 @@
 
 ### 效果图
 
-<img src="http://ourv0v3ed.bkt.clouddn.com/DroidVR.gif">
+<img src="/DroidVR.gif">
 
 ### [APK下载地址](https://fir.im/DroidVR)
+
+<br/>
 
 ### 我的微信公众号
 

@@ -32,7 +32,6 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
             signingConfig signingConfigs.release // apk签名
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all {
@@ -41,7 +40,6 @@ android {
         }
 
         debug {
-            minifyEnabled false
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all {
