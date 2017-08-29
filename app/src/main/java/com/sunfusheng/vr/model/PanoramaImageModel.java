@@ -10,24 +10,15 @@ public class PanoramaImageModel implements MultiItemEntity {
     public int type;
     public String title;
     public String desc;
-    public String resource;
+    public String assetName;
+    public int resourceName;
 
-    public PanoramaImageModel(String title, String resource) {
-        this.title = title;
-        this.resource = resource;
-    }
-
-    public PanoramaImageModel(String title, String desc, String resource) {
-        this.title = title;
-        this.desc = desc;
-        this.resource = resource;
-    }
-
-    public PanoramaImageModel(int type, String title, String desc, String resource) {
+    public PanoramaImageModel(int type, String title, String desc, String assetName, int resourceName) {
         this.type = type;
         this.title = title;
         this.desc = desc;
-        this.resource = resource;
+        this.assetName = assetName;
+        this.resourceName = resourceName;
     }
 
     @Override

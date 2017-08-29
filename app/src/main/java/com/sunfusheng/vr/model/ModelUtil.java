@@ -1,5 +1,7 @@
 package com.sunfusheng.vr.model;
 
+import com.sunfusheng.vr.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,25 +40,40 @@ public class ModelUtil {
             "尼亚加拉瀑布(Niagara Falls)位于加拿大安大略省和美国纽约州的交界处，瀑布源头为尼亚加拉河，主瀑布位于加拿大境内，是瀑布的最佳观赏地；在美国境内瀑布由月亮岛隔开，观赏的是瀑布侧面。同时，该瀑布也是世界第一大跨国瀑布。"
     };
 
-    public static final String[] resourceArr = {
+    public static final String[] assetArr = {
             "beijing_gugong.jpg",
             "shanghai_dongfangmingzhu.jpg",
             "guangzhou.jpg",
             "xianggang.jpg",
             "sky1.jpg",
             "dibaita.jpg",
-            "Santorini.jpg",
-            "Maldives.jpg",
-            "Residence.jpg",
+            "santorini.jpg",
+            "maldives.jpg",
+            "residence.jpg",
             "haidishijie.jpg",
             "jiguang.jpg",
-            "NiagaraFalls.jpg"
+            "niagara_falls.jpg"
+    };
+
+    public static final int[] resourceArr = {
+            R.mipmap.beijing_gugong,
+            R.mipmap.shanghai_dongfangmingzhu,
+            R.mipmap.guangzhou,
+            R.mipmap.xianggang,
+            R.mipmap.sky1,
+            R.mipmap.dibaita,
+            R.mipmap.santorini,
+            R.mipmap.maldives,
+            R.mipmap.residence,
+            R.mipmap.haidishijie,
+            R.mipmap.jiguang,
+            R.mipmap.niagara_falls
     };
 
     public static List<PanoramaImageModel> getPanoramaImageList() {
         List<PanoramaImageModel> list = new ArrayList<>();
         for (int i = 0; i < titleArr.length; i++) {
-            list.add(new PanoramaImageModel(0, titleArr[i], descArr[i], resourceArr[i]));
+            list.add(new PanoramaImageModel(0, titleArr[i], descArr[i], assetArr[i], resourceArr[i]));
         }
         return list;
     }
