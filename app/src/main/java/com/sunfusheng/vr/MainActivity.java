@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
+import com.sunfusheng.FirUpdater;
 import com.sunfusheng.vr.about.AboutActivity;
 import com.sunfusheng.vr.adapter.PanoramaImageAdapter;
 import com.sunfusheng.vr.model.ModelUtil;
@@ -37,16 +38,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        new FirUpdater(this, "3c57fb226edf7facf821501e4eba08d2", "59a52a7d959d69410b00060d").checkVersion();
+
         initView();
         initListener();
     }
 
     private void initView() {
-        ivMine = (ImageView) findViewById(R.id.iv_mine);
-        tvTitle = (TextView) findViewById(R.id.tv_title);
+        ivMine = findViewById(R.id.iv_mine);
+        tvTitle = findViewById(R.id.tv_title);
         ImageUtil.colorImageViewDrawable(ivMine, R.color.transparent60_white);
 
-        vrPanoramaView = (VrPanoramaView) findViewById(R.id.vrPanoramaView);
+        vrPanoramaView = findViewById(R.id.vrPanoramaView);
         vrPanoramaView.setTouchTrackingEnabled(true);
         vrPanoramaView.setFullscreenButtonEnabled(true);
         vrPanoramaView.setInfoButtonEnabled(false);
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         PanoramaImageModel model = ModelUtil.getPanoramaImageList().get(currPosition);
         loadPanoramaImage(model);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
         mAdapter = new PanoramaImageAdapter(this, ModelUtil.getPanoramaImageList());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);

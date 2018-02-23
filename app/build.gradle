@@ -1,19 +1,18 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 
 Properties prop = new Properties()
-prop.load(new FileInputStream(file("../signing.properties")))
+prop.load(new FileInputStream(file("../signings/signing.properties")))
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         applicationId "com.sunfusheng.vr"
         minSdkVersion 19
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 27
+        versionCode 2
+        versionName "1.1.0"
     }
 
     compileOptions {
@@ -32,10 +31,10 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release // apk签名
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all {
-                variant -> generateAppName(variant)
+                variant -> generateApk(variant)
             }
         }
 
@@ -43,27 +42,29 @@ android {
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all {
-                variant -> generateAppName(variant)
+                variant -> generateApk(variant)
             }
         }
     }
 }
 
-//生成自定义App名称
-def generateAppName(variant) {
-    variant.outputs.each { output ->
-        def file = output.outputFile
-        output.outputFile = new File(file.parent, "DroidVR-V" + android.defaultConfig.versionName + ".apk")
+def generateApk(variant) {
+    if (variant.buildType.name == "release") {
+        variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/app/outputs")
+        variant.getPackageApplication().outputScope.apkDatas.forEach { apkData ->
+            apkData.outputFileName = "DroidVR.apk"
+        }
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
-    compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'com.android.support:appcompat-v7:27.0.2'
+    compile 'com.android.support:design:27.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:percent:26.0.0-alpha1'
-    compile 'com.sunfusheng:glideimageview:1.0.0'
+    compile 'com.android.support:percent:27.0.2'
+    compile 'com.sunfusheng:glideimageview:1.2.0'
+    compile 'com.sunfusheng:FirUpdater:1.0.7'
     compile 'com.google.vr:sdk-panowidget:1.80.0'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.28'
 }
