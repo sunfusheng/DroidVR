@@ -5,8 +5,6 @@ prop.load(new FileInputStream(file("../signings/signing.properties")))
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.3"
-
     defaultConfig {
         applicationId "com.sunfusheng.vr"
         minSdkVersion 19
@@ -58,13 +56,13 @@ def generateApk(variant) {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:27.0.2'
-    compile 'com.android.support:design:27.0.2'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:percent:27.0.2'
-    compile 'com.sunfusheng:glideimageview:1.2.0'
-    compile 'com.sunfusheng:FirUpdater:1.0.7'
-    compile 'com.google.vr:sdk-panowidget:1.80.0'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.28'
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api 'com.android.support:appcompat-v7:27.1.1'
+    api 'com.android.support:design:27.1.1'
+    api 'com.android.support.constraint:constraint-layout:1.1.0'
+    api 'com.android.support:percent:27.1.1'
+    api 'com.sunfusheng:glideimageview:1.2.0'
+    api 'com.sunfusheng:FirUpdater:1.0.7'
+    api 'com.google.vr:sdk-panowidget:1.80.0'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.28'
 }
