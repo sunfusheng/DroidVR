@@ -38,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new FirUpdater(this, "3c57fb226edf7facf821501e4eba08d2", "59a52a7d959d69410b00060d").checkVersion();
+        new FirUpdater(this)
+                .apiToken("3c57fb226edf7facf821501e4eba08d2")
+                .appId("59a52a7d959d69410b00060d")
+                .checkVersion();
 
         initView();
         initListener();
